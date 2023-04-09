@@ -1,0 +1,33 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<body>
+    <nav class="navbar navbar-expand-lg bg-white sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <img src="~/images/AsK.png" />
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto"  style="margin-left:auto; margin-right:0;">
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Teacher" asp-action="HomeTeacher">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Teacher" asp-action="ViewQuestions">View all questions</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../Users/Profile">@RenderSection("username", required:false)</a>
+                    </li>
+                </ul>
+                <a href="/Users/logout" class="btn btn-brand ms-lg-3">LogOut</a>
+            </div>
+        </div>
+    </nav>
+        <div>
+        @RenderBody()
+        </div>
+</body>

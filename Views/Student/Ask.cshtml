@@ -1,0 +1,40 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout1.cshtml";
+}
+<body>    
+@*    <h3 style="color:#00b6a1;" >@ViewBag.Message</h3>
+*@        <div class="container question-form">
+            <div class="row mt-4 justify-content-center">    
+                <div class="col-md-8">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="offest-md-4">
+                                <p class="text-center mt-4 mb-4 fw-bolder">                                       
+                                    <i><img src="~/images/edit-alt-regular-24.png" alt=""></i>
+                                    <span style="font-style: italic;font-weight: 600;">
+                                        Ask any question and you be sure find your answer?
+                                    </span></p>
+                                <form class="question-login" method="post" action="/Student/Ask" >
+                                    <!-- Title input -->
+                                    <div class="form-outline mb-4">
+                                        <input type="text" id="form2Example1" class="form-control" placeholder="Title" name="title" required/>
+                                    </div>
+                                    <p style="align-items: center;">
+                                        <div class="col-sm-12"><textarea class="form-control inputstl" rows="10" name="description" placeholder="Description" required></textarea></div>
+                                    <br />
+                                    <div class="form-outline mb-2">
+                                        <input type="text" id="form2Example2" class="form-control" placeholder="Tag" name="tag" required/>
+                                    </div>
+                                    <input type="hidden" name="User" value="@Context.Session.GetString("UserName")" />
+                                        <!-- Submit button -->
+                                     <div class="col-md-13" style="padding-left: 550px;">
+                                        <button type="submit" class="btn btn-brand ms-lg-3" style=" margin-top: 20px">Ask Now</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</body>

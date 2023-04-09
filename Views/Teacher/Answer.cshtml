@@ -1,0 +1,40 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+@model Question
+<body>    
+        <div class="container question-form">
+            <div class="row mt-4 justify-content-center">    
+                <div class="col-md-8">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="offest-md-4">
+                                <p class="text-center mt-4 mb-4 fw-bolder">                                       
+                                    <i><img src="~/images/edit-alt-regular-24.png" alt=""></i>
+                                    <span style="font-style: italic;font-weight: 600;">
+                                        Ask any question and you be sure find your answer?
+                                    </span></p>
+                                <form class="question-login" method="post" asp-controller="Teacher" asp-action="Answer" >
+                                    <!-- Title input -->
+                                    <div class="form-outline mb-4">
+                                        <input class="form-control" asp-for="Title" placeholder="Title"required/>
+                                    </div>
+                                    <p style="align-items: center;">
+                                        <div class="col-sm-12"><textarea class="form-control inputstl" rows="10"  asp-for="Description" placeholder="Description" required></textarea></div>
+                                    <br />
+                                    <div class="form-outline mb-2">
+                                        <input class="form-control"  asp-for="Tag" placeholder="Tag" required/>
+                                    </div>
+                                    <input type="hidden" name="User" value="@Context.Session.GetString("UserName")" />
+                                        <!-- Submit button -->
+                                     <div class="col-md-13" style="padding-left: 600px;">
+                                        <button type="submit" class="btn btn-brand ms-lg-3" style=" margin-top: 20px">Save</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</body>

@@ -1,0 +1,83 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+@model IEnumerable<Question>
+<body>
+       <div class="container question-form">
+        <div class="row mt-4 justify-content-center">    
+            <div class="col-md-8" >
+                <div class="card">
+                    <div class="card-body" >
+                        <div class="offest-md-4">
+                            <b>Search By : </b>
+                            <select id="SearchBy">
+                                <option value="Tag">Tag</option>
+                                <option value="User">User</option>
+                            </select><br /><br />
+                            @Html.TextBox("Search")<input type="submit" id="SearchBtn" value="Search" style=" color:white; background-color: #008374;" /><br /><br />
+                        <table>
+                                <tbody id="DataSearching">
+                            @foreach (var question in Model){
+                            <tr>
+                            <div class="border border-info" style="padding:6px;">
+                                    <!-- Title input -->
+                                <div class="form-outline mb-4">
+                                    <i><img src="~/images/bulb-solid-24.png" alt=""></i>
+                                    <label class="form-label" for="form2Example1" style=" font-size:28px;color:#00b6a1;font-family: 'Courier New', Courier, monospace;"><b>@question.Title</b></label>
+                                </div>
+                                <p>
+                                   @question.Description
+                                </p>
+                                <div class="form-outline sm-4" style="padding-top: 5px;">
+                                    <div class="text-warning">
+                                        <i class="ri-star-fill" ></i> 
+                                    <span style="color: #008374;">5</span>
+                                    <span class="label label-default" style="color: #008374; padding-left: 20px;">@question.Tag</span>
+                                    <span class="label label-default" style="color: #008374; padding-left: 20px;">@question.User</span>
+                                    </div>                   
+                                </div>
+                            </div>
+                            </tr>
+                              <br />
+                            }
+                            </tbody>
+                        </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#SearchBtn").click(function () {
+                var SearchBy = $("#SearchBy").val();
+                var SearchValue = $("#Search").val();
+                var SetData = $("#DataSearching");
+                SetData.html("");
+                $.ajax({
+                    type: "POST",
+                    url: "/Home/GetSearchingData?SearchBy=" + SearchBy + "&SearchValue=" + SearchValue,
+                    contentType: "html",
+                    success: function (result) {
+                        if (result.length == 0) {
+                            SetData.append('<tr style="color:red"><td colspan="3">No Match Data</td></tr>')
+                        }
+                        else {
+                            $.each(result, function (index, value) {
+                                var Data = "<tr>" +
+                                "<b>" + value.Title + "</b>"
+                                "<p>" + value.Description + "</p>"
+                                "<span>" + value.Tag + "</span>"
+                                "<span>" + value.User + "</span>"
+                                    "</tr>";
+                                SetData.append(Data);
+
+                            });
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+</body>

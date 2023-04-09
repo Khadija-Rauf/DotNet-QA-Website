@@ -1,0 +1,91 @@
+﻿@model User
+<!doctype html>
+<html lang="en">
+<body>
+    <div class="container login-form">
+        <div class="row mt-4 justify-content-center">
+
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="offest-md-4">
+                            <h1 class="text-center mt-4 mb-4 fw-bolder">Register</h1>
+                            <p style="color:red">@ViewBag.Message</p>
+                            <form class="form-login" asp-controller="Users" enctype="multipart/form-data" method="post" asp-action="SignUp">
+                                 <div class="form-outline mb-4">
+                                    <label asp-for="Email" class="form-label"></label>
+                                    <input asp-for="Email" class="form-control" placeholder="E-mail" required/>
+                                    <span asp-validation-for="Email" class="text-danger"></span>
+                                </div>
+                                @Html.Partial("InputFields")
+                                <div class="form-outline mb-4">
+                                    <label class="form-label" asp-for="Password"></label>
+                                    <input asp-for="Password" class="form-control" placeholder="Password" type="password" id="password" onkeyup='check();' required />
+                                </div>
+                                <div class="form-outline mb-4">
+                                    <label class="form-label " for="form2Example2">Confirm Password</label>
+                                    <input type="password" id="confirm_password" class="form-control" name="confirm_password"
+                                           placeholder="Confirm Password" onkeyup='check();' required />
+                                    <span id='message'></span>
+                                </div>
+                                <div class="form-outline mb-4">
+                                    <label asp-for="UserType" class="form-label" ></label>
+                                    <input asp-for="UserType" class="form-control"
+                                        placeholder="Type" required/>
+                                </div>
+                                <div class="form-outline mb-4">
+                                    <label asp-for="ProfilePhoto" class="form-label"></label>
+                                    <div class="mb-3">
+                                        <input id="postedFiles" asp-for="ProfilePhoto" asp-action="Create" class="form-control form-control-sm" required>
+                                    </div>
+                                </div>
+                                <!-- Submit button -->
+                                <div class="">
+                                    <button type="submit" class="col-12 btn btn-brand me-2 btn-block mb-4" onclick="uploadFiles();">
+                                        Create new Account
+                                    </button>
+                                </div>
+                                <p class="text-center"> Already have account?<a href="login" class="text-brand">
+                                        Sign in</a></p>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <script>
+          var check = function() {
+              if (document.getElementById('password').value ==
+                document.getElementById('confirm_password').value) {
+                document.getElementById('message').style.color = 'green';
+                document.getElementById('message').innerHTML = 'matching';
+              } else {
+                document.getElementById('message').style.color = 'red';
+                document.getElementById('message').innerHTML = 'not matching';
+              }
+        }
+        function uploadFiles() {
+            var input = document.getElementById("postedFiles");
+            var files = input.files;
+            var formData = new FormData();
+            for (var i = 0; i != files.length; i++) {
+                formData.append("files", files[i]);
+            }
+            $.ajax(
+                {
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    type: "POST",
+                    success: function (data) {
+                        alert("Files Uploaded!" + data);
+                    }
+                }
+            );
+        }
+    </script>
+</body>
+
+</html>

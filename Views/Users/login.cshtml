@@ -1,0 +1,35 @@
+﻿@model User
+<!doctype html>
+<html lang="en">
+<body>
+    <div class="container login-form">
+        <div class="row mt-4 justify-content-center">
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="offest-md-4">
+                            <h1 class="text-center mt-4 mb-4 fw-bolder">Login</h1>
+                           <p style="color:red">@ViewBag.Message</p>
+                            <form class="form-login" method="post" action="/Users/login">
+                                <!-- Email input -->
+                                @Html.Partial("InputFields")
+                                <div class="form-outline mb-4">
+                                    <label class="form-label" asp-for="Password"></label>
+                                    <input asp-for="Password" class="form-control" placeholder="Password" type="password" required />
+                               </div>
+                                <!-- Submit button -->
+                                <div class="col-md-12">
+                                    <button type="submit" class="col-12 btn btn-brand btn-block mb-4">Sign
+                                        in</button>
+                                </div>
+                                <p class="text-center"> Don't have account yet?<a href="SignUp" class="text-brand"> Sign up</a></p>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
